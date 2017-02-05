@@ -1,0 +1,16 @@
+{
+    "name": "matthew-p/form-builder",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matthew Patell",
+            "email": "hellboymxb@gmail.com"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "3.3.6"
+    },
+    "extra": {
+
+    }
+}
