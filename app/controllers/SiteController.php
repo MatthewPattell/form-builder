@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use app\components\BaseController;
+use app\models\Form;
 
 /**
  * Class SiteController
@@ -20,6 +21,10 @@ class SiteController extends BaseController
      */
     public function actionIndex(): string
     {
-        return $this->render('index');
+        $models = Form::getModels();
+
+        return $this->render('index', [
+            'models' => $models
+        ]);
     }
 }

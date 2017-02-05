@@ -35,7 +35,9 @@ class Router
      */
     public static function run(): string
     {
-        $request = explode('/', $_SERVER['REQUEST_URI']);
+        $request_url = explode('?', $_SERVER['REQUEST_URI'], 2);
+
+        $request = explode('/', $request_url[0] ?? $request_url);
 
         if (is_array($request)) {
             $request = array_values(array_filter($request));

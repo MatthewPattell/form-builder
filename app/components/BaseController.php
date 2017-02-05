@@ -87,7 +87,11 @@ abstract class BaseController
      */
     public function run()
     {
-        $method = 'action'.ucfirst($this->actionID);
+        $action = explode('-', $this->actionID);
+        $action = array_map('ucfirst', $action);
+        $action = implode('', $action);
+
+        $method = 'action'.$action;
 
         if (method_exists($this, $method)) {
             echo $this->$method();
@@ -101,9 +105,10 @@ abstract class BaseController
      * Render view file
      *
      * @param string $view
+     * @param array $varibles
      * @return string
      */
-    public function render(string $view): string
+    public function render(string $view, array $varibles = []): string
     {
         $viewFile = implode(DIRECTORY_SEPARATOR, [
             ROOT_DIR,
@@ -120,6 +125,13 @@ abstract class BaseController
         ]);
 
         if (file_exists($viewFile) && file_exists($layout)) {
+
+            if (!empty($varibles)) {
+                extract($varibles, EXTR_PREFIX_SAME, 'wwdx');
+            }
+
+            unset($varibles);
+
             ob_start();
             require($viewFile);
             $content = ob_get_clean();
@@ -250,5 +262,20 @@ abstract class BaseController
         }
 
         return $files_included;
+    }
+
+    /**
+     * Redirect to another page
+     *
+     * @param string $url
+     * @return void
+     */
+    public function redirect(string $url)
+    {
+        $protocol   = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https' : 'http';
+        $host       = $_SERVER['HTTP_HOST'];
+
+        header('Location: '. $protocol .'://'. $host . $url);
+        exit;
     }
 }

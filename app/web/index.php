@@ -6,8 +6,8 @@
  */
 
 define('ROOT_DIR', dirname(__DIR__.'../'));
-$vendor_path = dirname(ROOT_DIR.'../'). DIRECTORY_SEPARATOR . 'vendor/';
-define('VENDOR_DIR', $vendor_path);
+define('PROJECT_DIR', dirname(ROOT_DIR.'../').DIRECTORY_SEPARATOR);
+define('VENDOR_DIR', PROJECT_DIR.'vendor'.DIRECTORY_SEPARATOR);
 
 require(__DIR__ . '/../../vendor/autoload.php');
 
@@ -26,6 +26,6 @@ spl_autoload_register(function ($className)
     if (!class_exists($className, false) && !interface_exists($className, false) && !trait_exists($className, false)) {
         exit("Unable to find '$className' in file: $classFile. Namespace missing?");
     }
-}, true, true);
+}, true, false);
 
 app\components\Router::run();

@@ -8,7 +8,8 @@
 namespace app\controllers;
 
 use app\components\BaseController;
-use app\components\FormHelper;
+use app\components\Form\FormHelper;
+use app\models\Form;
 
 /**
  * Class FormsController
@@ -23,7 +24,49 @@ class FormsController extends BaseController
      */
     public function actionCreate(): string
     {
-        return $this->render('create');
+        $form = new Form();
+
+        if ($form->load($_POST['Form'] ?? []) && $form->save()) {
+            $this->redirect('/');
+        }
+
+        return $this->render('create', [
+            'form' => $form
+        ]);
+    }
+
+    public function actionUpdate(): string
+    {
+        $form = Form::find($_GET['id'] ?? null);
+
+        if (!$form) {
+            exit('Page not found.');
+        }
+
+        if ($form->load($_POST['Form'] ?? []) && $form->save()) {
+            $this->redirect('/');
+        }
+
+        return $this->render('update', [
+            'form' => $form
+        ]);
+    }
+
+    /**
+     * Delete model
+     *
+     */
+    public function actionDelete()
+    {
+        $form = Form::find($_GET['id'] ?? null);
+
+        if (!$form) {
+            exit('Page not found.');
+        }
+
+        $form->delete();
+
+        $this->redirect('/');
     }
 
     /**
@@ -34,10 +77,16 @@ class FormsController extends BaseController
      */
     public function actionField(): string
     {
-        $type = $_POST['type'];
+        return FormHelper::getField($_POST['type'] ?? '', 'Sample name', null, [], true);
+    }
 
-        $field = FormHelper::getField($type, 'Sample name');
-
-        return $field;
+    /**
+     * Get field properties
+     *
+     * @return string
+     */
+    public function actionFieldProperties(): string
+    {
+        return FormHelper::getProperties($_POST['id'] ?? null,$_POST['type'] ?? '', $_POST['html'] ?? '');
     }
 }

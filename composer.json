@@ -7,10 +7,16 @@
             "email": "hellboymxb@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
-        "twbs/bootstrap": "3.3.6"
+        "twbs/bootstrap": "3.3.6",
+        "bower-asset/dragula": ">= 3.7.0",
+        "imangazaliev/didom": "*"
     },
     "extra": {
-
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
     }
 }

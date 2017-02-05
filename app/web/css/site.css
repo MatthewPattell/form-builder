@@ -6,6 +6,20 @@
 @-o-viewport      { width: device-width; }
 @viewport         { width: device-width; }
 
+.sortable {
+    cursor: pointer;
+    color: #504cff;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+}
+
+.sortable span {
+    margin-left: 3px;
+}
+
+/** CREATE FORM **/
 .field-type {
     border: 1px solid #e8e8e8;
     border-radius: 3px;
@@ -21,3 +35,52 @@
 .field-type:hover {
     background-color: #f7f7f7;
 }
+
+.config-buttons {
+    display: inline-block;
+    opacity: 0;
+}
+
+.form-group:hover .config-buttons {
+    opacity: 1;
+}
+
+#user-form {
+    min-height: 60px;
+}
+
+.config-buttons .glyphicon {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.toggle h4 {
+    background: #e0e0e0;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.toggle h4.open {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #afafaf;
+}
+
+.toggle h4 .glyphicon {
+    float: right;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+#list-fields div[class^="col-"] {
+    margin-bottom: 5px;
+}
+
+.gu-transit {
+    display: block !important;
+    width: 100% !important;
+}
+/** END CREATE FORM **/

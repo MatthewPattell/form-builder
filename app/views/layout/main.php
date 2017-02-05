@@ -24,10 +24,12 @@
     <![endif]-->
 </head>
 <body>
-    <? require('_header.php'); ?>
+    <div class="wrap">
+        <? require('_header.php'); ?>
 
-    <div class="container">
-        <? echo $content; ?>
+        <div class="container">
+            <? echo $content; ?>
+        </div>
     </div>
 
     <? require('_footer.php'); ?>
